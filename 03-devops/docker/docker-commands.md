@@ -6,7 +6,7 @@
 
 8.3. “docker  images -a”: liệt kê những image trong máy.
 
-8.4. “docker  —version”
+8.4. “docker  --version”
 
 8.5.”docker build -t tên_image .”: để build docker image từ docker file
 
