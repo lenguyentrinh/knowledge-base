@@ -9,6 +9,8 @@ Tài liệu tổng hợp kiến thức đã research và tra cứu.
   - [Docker](03-devops/docker/)
   - [CI/CD](03-devops/ci-cd/)
   - [Linux](03-devops/linux/)
+- [05-architecture](05-architecture/README.md)
+  - [Cloudinary và CDN](05-architecture/cloudinary-cdn.md)
 
 ## Quy ước
 
