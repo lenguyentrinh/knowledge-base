@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 370" width="820" height="370" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f2937"/>
+    </marker>
+  </defs>
+  <rect width="820" height="370" fill="#ffffff"/>
+
+  <!-- Service A -> Service B -->
+  <rect x="30" y="30" width="140" height="62" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="100" y="58" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Service A</text>
+  <text x="100" y="78" text-anchor="middle" font-size="12" fill="#475569">client</text>
+  <rect x="650" y="30" width="140" height="62" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="720" y="58" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">Service B</text>
+  <text x="720" y="78" text-anchor="middle" font-size="12" fill="#475569">server</text>
+  <line x1="172" y1="61" x2="646" y2="61" stroke="#1f2937" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="410" y="50" text-anchor="middle" font-size="13" fill="#374151">HTTP đồng bộ — A đứng chờ</text>
+
+  <!-- 3 problems -->
+  <g stroke="#dc2626" stroke-width="1.5" fill="#fee2e2">
+    <rect x="170" y="125" width="150" height="62" rx="8"/>
+    <rect x="335" y="125" width="150" height="62" rx="8"/>
+    <rect x="500" y="125" width="150" height="62" rx="8"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="245" y="151" font-size="15" font-weight="700" fill="#b91c1c">Tight coupling</text>
+    <text x="245" y="172" font-size="12" fill="#6b7280">B chết → A tắc</text>
+    <text x="410" y="151" font-size="15" font-weight="700" fill="#b91c1c">Tự lo retry</text>
+    <text x="410" y="172" font-size="12" fill="#6b7280">khi B quá tải / lỗi</text>
+    <text x="575" y="151" font-size="15" font-weight="700" fill="#b91c1c">Nhiều đích</text>
+    <text x="575" y="172" font-size="12" fill="#6b7280">phải gửi từng request</text>
+  </g>
+
+  <!-- A -> nhiều cửa hàng -->
+  <rect x="30" y="222" width="140" height="40" rx="6" fill="#ffffff" stroke="#1f2937" stroke-width="1.5"/>
+  <text x="100" y="247" text-anchor="middle" font-size="14" font-weight="700" fill="#111827">Service A</text>
+  <line x1="172" y1="242" x2="646" y2="242" stroke="#1f2937" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="410" y="233" text-anchor="middle" font-size="13" fill="#374151">request 1</text>
+  <rect x="650" y="222" width="140" height="40" rx="6" fill="#ffffff" stroke="#1f2937" stroke-width="1.5"/>
+  <text x="720" y="247" text-anchor="middle" font-size="14" font-weight="700" fill="#111827">Cửa hàng 1</text>
+
+  <line x1="100" y1="262" x2="100" y2="299" stroke="#1f2937" stroke-width="2"/>
+  <line x1="100" y1="299" x2="646" y2="299" stroke="#1f2937" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="380" y="290" text-anchor="middle" font-size="13" fill="#374151">request 2, 3, ... n</text>
+  <rect x="650" y="279" width="140" height="40" rx="6" fill="#ffffff" stroke="#1f2937" stroke-width="1.5"/>
+  <text x="720" y="304" text-anchor="middle" font-size="14" font-weight="700" fill="#111827">Cửa hàng 2..n</text>
+
+  <text x="410" y="350" text-anchor="middle" font-size="14" fill="#374151">Giao tiếp trực tiếp: đơn giản nhưng <tspan fill="#dc2626" font-weight="700">phụ thuộc chặt, khó mở rộng</tspan></text>
+</svg>
