@@ -90,4 +90,4 @@ Cột LAG cho biết consumer đang chậm bao nhiêu message.
 ```bash
 docker compose exec kafka /opt/kafka/bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 --topic <ten-topic>
 ```
-Kết quả trả về offset cuối mỗi partition (partition:offset:count-ish, cần cộng dồn theo partition).
+Kết quả trả về offset cuối mỗi partition (topic:partition:offset, cần cộng dồn theo partition).

@@ -17,7 +17,7 @@
 
 ## Workflow
 
-Cluster gồm nhiều broker, topic tồn tại trên toàn cluster, trong topic sẽ nhiều cái partition, và nó thì sẽ lưu trữ trên broker khác nhau, và sẽ những partition gọi leader kèm theo đó là có thể có nhiều partition follower thì sẽ lưu ở những broker khác, khi broker nào đó bị lỗi mà chứ partition leader, thì kafka(zookeeper)sẽ có partition follower khác ở broker khác được làm bầu lên leader, đảm nhiệm nhiệm đó leader đó.
+Cluster gồm nhiều broker, topic tồn tại trên toàn cluster, trong topic sẽ nhiều cái partition, và nó thì sẽ lưu trữ trên broker khác nhau, và sẽ những partition gọi leader kèm theo đó là có thể có nhiều partition follower thì sẽ lưu ở những broker khác, khi broker nào đó bị lỗi mà chứa partition leader, thì kafka(zookeeper)sẽ có partition follower khác ở broker khác được làm bầu lên leader, đảm nhiệm nhiệm đó leader đó.
 
 Topic là tài nguyên logic nằm trên cluster, broker nào có partition của topic đó thì topic đó mới tồn tại ngược lại thì không
 
@@ -25,12 +25,12 @@ Topic là tài nguyên logic nằm trên cluster, broker nào có partition củ
 
 Dựa vào acknowledge, có 3 chế độ:
 - Ack: 0 (fire and forget), không chờ phản hồi có thể mất message
-- Ack:1 (default) chờ leader xác nhận (vẫn có rủi ro nếu leader hỏng).
-- Ack: all  chờ leader phản hồi + toàn bộ write thành công -> không mất message
+- Ack:1 (default trước Kafka 3.0, từ Kafka 3.0 mặc định là all) chờ leader xác nhận (vẫn có rủi ro nếu leader hỏng).
+- Ack: all  chờ leader phản hồi + toàn bộ replica đang đồng bộ (ISR) write thành công -> không mất message
 
 -> chế độ càng đảm bảo message được ghi thì càng bị giảm performance
 
--Điều kiện ràng buộc: min.insync.replicas(số partition follower tối thiểu được ghi vào mới xác nhận là ghi thành công ) <= replication.factor(tổng partition follower của leader)
+-Điều kiện ràng buộc: min.insync.replicas(số replica tối thiểu, tính cả leader, được ghi vào mới xác nhận là ghi thành công ) <= replication.factor(tổng số replica, tính cả leader)
 
 Làm sao để producer điều hướng message vào đúng partition để giữ ordering?
 
@@ -39,13 +39,13 @@ Dùng message key
 Consumer nhận được message như thế nào?
 - Consumer đọc message từ topic(xác định bằng topic name)
 - Đọc tuần tự trong partition(offset 1 rồi mới đến 2)
-- 1 consumer thì có đọc nhiều partition( tùy vào cách code, sử dụng đa luồng xử lý nhiều partition cùng một cách) nhưng 1 partition consumer trong cùng một group
+- 1 consumer thì có đọc nhiều partition( tùy vào cách code, sử dụng đa luồng xử lý nhiều partition cùng một cách) nhưng 1 partition chỉ được 1 consumer trong cùng một group đọc
 - Cái message ordering chỉ đảm bảo khi cùng trên một partition.
 
 ## Application layer và Transport:
 
 - Emit(Producer), @EventPattern(chỉ cần gửi và không cần nhận phản hồi)(Consumer)
-- sent(Producer), @MessagePattern(Gửi và chờ nhận phản hồi)(framework NestJS)(Consumer)
+- send(Producer), @MessagePattern(Gửi và chờ nhận phản hồi)(framework NestJS)(Consumer)
 
 Mấy cách tạo topic trong Kafka?(2 cách) Nếu set auto trong file config thì dòng code nào sẽ quyết định topic được tạo?
 
@@ -53,4 +53,4 @@ Consumer commit offset để làm gì? Để đánh dấu tiến độ đọc co
 
 Sự khác nhau giữa auto commit và manual commit?
 - Auto commit: consumer tự commit offset theo chu kỳ
-- Manual commit: tự gọi commit khi đã sử lý xong
+- Manual commit: tự gọi commit khi đã xử lý xong
