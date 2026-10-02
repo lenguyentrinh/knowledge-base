@@ -5,6 +5,8 @@ Tài liệu tổng hợp kiến thức đã research và tra cứu.
 ## Mục lục
 
 - [00-inbox](00-inbox/) — ghi chú chưa phân loại, dọn dần sau
+- [01-java](01-java/README.md)
+  - [Câu hỏi phỏng vấn Java](01-java/java-interview-questions.md)
 - [02-messaging](02-messaging/README.md)
   - [Message broker](02-messaging/message-broker-basics.md)
   - [Kafka](02-messaging/kafka/)
