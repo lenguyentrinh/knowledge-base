@@ -21,7 +21,7 @@
 
 ## React là gì? Vì sao dùng React thay vì các framework khác như Angular hoặc Vue?
 
-React là một thư viện JavaScript để xây dựng giao diện người dùng. Nó linh hoạt, nhanh nhờ Virtual DOM, và có cộng đồng rất lớn. Nó chỉ tập trung vào tầng view, nên nhẹ hơn Angular và được áp dụng rộng rãi hơn Vue.
+React là một thư viện JavaScript để xây dựng giao diện người dùng. Nó linh hoạt, nhanh nhờ Virtual DOM, và có cộng đồng rất lớn. Nó chỉ tập trung vào tầng view, nên nhẹ hơn Angular và được áp dụng rộng rãi hơn Vue. (Lưu ý: về mặt kỹ thuật React là thư viện, còn Angular là framework đầy đủ.)
 
 ## JSX là gì? Nó khác gì JavaScript thông thường?
 
@@ -69,7 +69,7 @@ Component là một đoạn code độc lập, có thể tái sử dụng, trả
 ## Xử lý sự kiện trong React hoạt động như thế nào?
 
 -> React dùng Synthetic Event, bao bọc các sự kiện gốc của trình duyệt để đảm bảo nhất quán giữa các trình duyệt.
-Thay vì gắn event listener vào từng phần tử, React dùng event delegation bằng cách gắn một listener duy nhất ở root.
+Thay vì gắn event listener vào từng phần tử, React dùng event delegation bằng cách gắn một listener duy nhất ở root container của ứng dụng (từ React 17; các bản cũ gắn ở `document`).
 Khi một sự kiện xảy ra, React tạo một SyntheticEvent và chuyển nó đến đúng handler của component.
 
 ## RESTful API là gì?
@@ -81,6 +81,7 @@ RESTful API là một Web API được thiết kế theo kiến trúc REST (Repr
 - Cacheable: Response có thể được cache để tăng hiệu năng.
 - Layered system: Client không cần biết nó đang gọi server nào.
 - Uniform interface: URL rõ ràng, được chuẩn hóa.
+- Code on demand (tùy chọn): Server có thể gửi code thực thi (ví dụ JavaScript) cho client khi cần.
 
 -> Một web API tuân theo các quy tắc này được gọi là RESTful API.
 -> RESTful API là một Web API tuân theo các nguyên tắc REST, dùng HTTP để cho phép giao tiếp stateless, có khả năng mở rộng và được chuẩn hóa giữa client và server.
