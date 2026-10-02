@@ -10,7 +10,7 @@
 
 ## Quy ước tổ chức
 
-- Chia theo chủ đề, thư mục cấp 1 đánh số (`00-inbox`, `01-java`, `02-messaging`, `03-devops`, `04-database`, `05-architecture`, `06-cheatsheets`, `07-troubleshooting`).
+- Chia theo chủ đề, thư mục cấp 1 đánh số (`00-inbox`, `01-backend`, `02-frontend`, `03-messaging`, `04-devops`, `05-database`, `06-architecture`, `07-cheatsheets`, `08-troubleshooting`).
 - Tên file và thư mục: tiếng Anh, chữ thường, kebab-case, không dấu, không khoảng trắng. Nội dung viết bằng tiếng Việt.
 - Mỗi chủ đề có `README.md` làm mục lục; thêm note mới thì cập nhật mục lục.
 - Note mới dùng `templates/note-template.md` khi là note viết mới; note chuyển từ ghi chú cũ thì giữ nguyên nội dung theo quy tắc 1.
