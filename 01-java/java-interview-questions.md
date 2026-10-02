@@ -26,7 +26,7 @@
   - [Có thể có nhiều catch dưới một khối try không?](#có-thể-có-nhiều-catch-dưới-một-khối-try-không)
   - [Nếu muốn một catch cho một exception và có nhiều catch dưới một try, thì cần tuân theo quy tắc nào?](#nếu-muốn-một-catch-cho-một-exception-và-có-nhiều-catch-dưới-một-try-thì-cần-tuân-theo-quy-tắc-nào)
   - [Còn Custom Exception thì sao?](#còn-custom-exception-thì-sao)
-  - [Còn Java Spring Pool thì sao?](#còn-java-spring-pool-thì-sao)
+  - [Còn Java String Pool thì sao?](#còn-java-string-pool-thì-sao)
   - [Làm thế nào để phòng tránh deadlock?](#làm-thế-nào-để-phòng-tránh-deadlock)
   - [Làm thế nào để bảo mật API (phía BE)?](#làm-thế-nào-để-bảo-mật-api-phía-be)
   - [Nói chung hơn, làm thế nào để hiện thực xác thực (authentication) cho người dùng? Hoặc session?](#nói-chung-hơn-làm-thế-nào-để-hiện-thực-xác-thực-authentication-cho-người-dùng-hoặc-session)
@@ -56,6 +56,7 @@ OOP được xây dựng trên bốn nguyên lý chính:
 - Single inheritance (đơn kế thừa) – một subclass kế thừa một superclass.
 - Multi-level inheritance (kế thừa nhiều cấp) – một class kế thừa một subclass của class khác.
 - Hierarchical inheritance (kế thừa phân cấp) – nhiều class kế thừa cùng một superclass.
+- Multiple inheritance (đa kế thừa) – một class kế thừa nhiều kiểu cùng lúc; trong Java chỉ thực hiện được qua interface.
 
 **Encapsulation (Đóng gói):** gom các field hoặc method liên quan vào một class duy nhất và hạn chế truy cập trực tiếp vào dữ liệu đó. Được thể hiện bằng cách khai báo field là private và cung cấp các getter/setter public.
 
@@ -82,7 +83,11 @@ Dùng abstrac t class sẽ không cần thiết và làm giảm tính linh hoạ
 
 ## Sự khác nhau giữa method overloading và method overriding?
 
-**Method Overriding:** Dùng để thay đổi hoặc mở rộng method của superclass. Method phải giống với method trong superclass (cùng tên, cùng danh sách tham số, và cùng kiểu trả về).
+**Method Overriding:** Dùng để thay đổi hoặc mở rộng method của superclass. Method phải giống với method trong superclass (cùng tên, cùng danh sách tham số, và cùng kiểu trả về hoặc kiểu con của nó (covariant)).
+
+Ví dụ: Tôi cần các thao tác cơ bản giống nhau cho tất cả entity, như add, findById và delete. Tôi định nghĩa một interface generic BaseRepository<T> chứa các method này. Mỗi repository cụ thể, như userRepository hay ProductRepository, implement interface và override các method để viết logic query riêng.
+
+**Method Overloading:** Cho phép một class có nhiều method cùng tên nhưng khác danh sách tham số (khác số lượng hoặc kiểu tham số).
 
 Ví dụ: Tôi cần lấy dữ liệu để hiển thị lên màn hình, nhưng mỗi trang chỉ cần một số field nhất định của entity. Để giữ cho gọn, tôi tạo một class Converter với nhiều method đều tên là convert, nhưng khác tham số và kiểu trả về, chẳng hạn:
 
@@ -90,10 +95,6 @@ Ví dụ: Tôi cần lấy dữ liệu để hiển thị lên màn hình, nhưn
 - convert(Product entity) → trả về ProductDto
 
 Khi gọi converter, Java tự động chọn đúng method dựa trên kiểu của tham số.
-
-**Method Overloading:** Cho phép một class có nhiều method cùng tên nhưng khác danh sách tham số (khác số lượng hoặc kiểu tham số).
-
-Ví dụ: Tôi cần các thao tác cơ bản giống nhau cho tất cả entity, như add, findById và delete. Tôi định nghĩa một interface generic BaseRepository<T> chứa các method này. Mỗi repository cụ thể, như userRepository hay ProductRepository, implement interface và override các method để viết logic query riêng.
 
 ## Các access modifier trong Java?
 
@@ -136,7 +137,7 @@ TreeMap giữ các key được sắp xếp tự động (thứ tự tự nhiên
 
 ## Sự khác nhau giữa checked và unchecked exception?
 
-Checked exception xảy ra ở compile time. Bạn cần xử lý bằng try-catch hoặc throws. Chúng thường do yếu tố bên ngoài gây ra.
+Checked exception được kiểm tra ở compile time. Bạn cần xử lý bằng try-catch hoặc throws. Chúng thường do yếu tố bên ngoài gây ra.
 
 Unchecked exception xảy ra ở run time. Chúng thường do lỗi logic trong quá trình phát triển tính năng.
 
@@ -152,14 +153,14 @@ Dùng finally để dọn dẹp hoặc đóng tài nguyên và đảm bảo đo�
 
 Trong Java, equality được định nghĩa ở mức object, không phải mức class.
 
-Theo mặc định, Object.equal() so sánh hai tham chiếu object, nghĩa là hai object chỉ bằng nhau khi chúng trỏ tới cùng một địa chỉ bộ nhớ.
+Theo mặc định, Object.equals() so sánh hai tham chiếu object, nghĩa là hai object chỉ bằng nhau khi chúng trỏ tới cùng một địa chỉ bộ nhớ.
 
-Để so sánh giá trị của object, ta override method equal và định nghĩa logic dựa trên giá trị, và cũng phải override hashCode() để đảm bảo hoạt động đúng trong các collection dựa trên hash.
+Để so sánh giá trị của object, ta override method equals và định nghĩa logic dựa trên giá trị, và cũng phải override hashCode() để đảm bảo hoạt động đúng trong các collection dựa trên hash.
 
 ## Bạn biết gì về synchronization trong Java?
 
 - Synchronization là cơ chế ngăn nhiều thread truy cập đồng thời vào tài nguyên dùng chung, tránh race condition và đảm bảo tính nhất quán dữ liệu.
-- Java cung cấp synchronization bằng từ khóa "Synchronized", có thể áp dụng cho method hoặc khối code.
+- Java cung cấp synchronization bằng từ khóa "synchronized", có thể áp dụng cho method hoặc khối code.
 
 ## Về Collection trong Java (Collection framework)?
 
@@ -202,14 +203,14 @@ Chúng ta phải tuân theo quy tắc sắp xếp các khối catch từ excepti
 
 ## Còn Custom Exception thì sao?
 
-Java cho phép ta tạo custom exception bằng cách định nghĩa một class mới extend class Exceptions hoặc RuntimeException, rồi ném nó bằng từ khóa throw.
+Java cho phép ta tạo custom exception bằng cách định nghĩa một class mới extend class Exception hoặc RuntimeException, rồi ném nó bằng từ khóa throw.
 Cái này gọi là custom Exception.
 Ta tạo custom exception khi các exception có sẵn của Java không bao phủ được logic nghiệp vụ cụ thể cho tình huống đó.
-Để tạo globalException sử dụng Anotation RestCotrollerAdvice (Write a single place to handle errors: When an exception occurs anywhere → it will be handled here.)
+Để tạo globalException sử dụng Annotation @RestControllerAdvice (Write a single place to handle errors: When an exception occurs anywhere → it will be handled here.)
 
-## Còn Java Spring Pool thì sao?
+## Còn Java String Pool thì sao?
 
-> Câu hỏi gốc ghi "Java Spring Pool"; nội dung trả lời nói về String pool.
+> Câu hỏi gốc ghi "Java Spring Pool"; đã sửa thành String Pool theo yêu cầu của chủ repo.
 
 String pool là một vùng nhớ đặc biệt bên trong heap dùng để lưu các string literal.
 Khi ta tạo một string literal, JVM kiểm tra xem giá trị giống vậy đã tồn tại trong pool chưa.
@@ -251,7 +252,7 @@ Có thể áp dụng thêm bảo mật ở mức method bằng @PreAuthorize, n�
    - Rate limiting2
    - Logging
    - Encoding
-   - Không biết user là ai
+   - Chưa biết user là ai (chưa qua Spring Security Filter Chain)
    - Không biết controller nào
 
   ↓
