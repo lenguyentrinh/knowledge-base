@@ -19,6 +19,8 @@ Tài liệu tổng hợp kiến thức đã research và tra cứu.
   - [Linux](04-devops/linux/)
 - [06-architecture](06-architecture/README.md)
   - [Cloudinary và CDN](06-architecture/cloudinary-cdn.md)
+- [07-cheatsheets](07-cheatsheets/README.md)
+  - [10 “món” dân IT muốn né nhưng không né nổi](07-cheatsheets/README.md)
 
 ## Quy ước
 
