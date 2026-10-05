@@ -8,5 +8,3 @@
 ## Ví dụ / Code
 
 ## Lưu ý & lỗi hay gặp
-
-## Nguồn tham khảo

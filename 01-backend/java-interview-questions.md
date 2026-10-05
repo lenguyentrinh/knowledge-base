@@ -41,8 +41,6 @@
   - [Dependency Injection](#dependency-injection)
   - [Vấn đề khó nhất bạn từng gặp?](#vấn-đề-khó-nhất-bạn-từng-gặp)
   - [Optional và NullPointerException](#optional-và-nullpointerexception)
-  - [Nguồn tham khảo](#nguồn-tham-khảo)
-
 ---
 
 ## Bốn nguyên lý chính của OOP là gì?
@@ -428,7 +426,3 @@ Thay vì trả về null, một method trả về Optional, điều này chỉ r
 
 Tuy nhiên, dùng isPresent() kèm get() không được khuyến khích, vì nó giống với kiểm tra null và vẫn có thể dẫn đến runtime exception nếu dùng sai. Thay vào đó, tốt hơn là dùng các method như ifPresent, orElse, hoặc orElseThrow để xử lý an toàn và diễn đạt rõ ràng hơn.
 Kiểm tra null thì ngầm định (implicit) và dễ bị quên, còn Optional làm cho việc không có giá trị trở nên tường minh và khuyến khích cách xử lý an toàn hơn.
-
-## Nguồn tham khảo
-
-- Ghi chú phỏng vấn cá nhân (bản gốc tiếng Anh, dán vào để dịch).

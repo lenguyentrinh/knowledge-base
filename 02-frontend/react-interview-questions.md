@@ -151,7 +151,3 @@ Dùng Redux khi:
 - Chỉ tải những gì người dùng thực sự cần
 
 -> Để tối ưu hiệu năng, ta nên chỉ render component khi cần thiết, chỉ tính các giá trị khi cần, và chỉ tải phần code mà người dùng thực sự cần.
-
-## Nguồn tham khảo
-
-- Ghi chú phỏng vấn cá nhân (bản gốc tiếng Anh, dán vào để dịch).
